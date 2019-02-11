@@ -1,0 +1,16 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - QueueDemo",
+            "request": "launch",
+            "mainClass": "QueueDemo"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - VehicleDemo",
+            "request": "launch",
+            "mainClass": "VehicleDemo"
+        }
+    ]
+}
