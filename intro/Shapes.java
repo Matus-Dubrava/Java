@@ -1,14 +1,29 @@
-class TwoDShape {
+abstract class TwoDShape {
     private double width;
     private double height;
+    private String name;
 
-    public TwoDShape(double v) {
-        this.width = this.height = v;
+    public TwoDShape() {
+        this.width = 0.0;
+        this.height = 0.0;
+        this.name = "none";
     }
 
-    public TwoDShape(double w, double h) {
+    public TwoDShape(double v, String n) {
+        this.width = this.height = v;
+        this.name = n;
+    }
+
+    public TwoDShape(double w, double h, String n) {
         this.width = w;
         this.height = h;
+        this.name = n;
+    }
+
+    public TwoDShape(TwoDShape ob) {
+        this.width = ob.width;
+        this.height = ob.height;
+        this.name = ob.name;
     }
 
     public double getWidth() {
@@ -19,6 +34,10 @@ class TwoDShape {
         return this.height;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public void setWidth(double width) {
         this.width = width;
     }
@@ -27,17 +46,38 @@ class TwoDShape {
         this.height = height;
     }
 
+    public void setName(String n) {
+        this.name = n;
+    }
+
     public void showDim() {
         System.out.println("widht: " + this.width + ", height: " + this.height);
     }
+
+    abstract double area();
 }
 
 class Triangle extends TwoDShape {
     private String style;
 
+    public Triangle() {
+        super();
+        this.style = "none";
+    }
+
     public Triangle(double w, double h, String s) {
-        super(w, h);
+        super(w, h, "triangle");
         this.style = s;
+    }
+
+    public Triangle(double x) {
+        super(x, "triangle");
+        this.style = "filled";
+    }
+
+    public Triangle(Triangle ob) {
+        super(ob);
+        this.style = ob.style;
     }
 
     public void setStyle(String s) {
@@ -71,12 +111,20 @@ class ColorTriangle extends Triangle {
 }
 
 class Rectangle extends TwoDShape {
+    public Rectangle() {
+        super();
+    }
+
     public Rectangle(double v) {
-        super(v);
+        super(v, "rectangle");
     }
 
     public Rectangle(double w, double h) {
-        super(w, h);
+        super(w, h, "rectangle");
+    }
+
+    public Rectangle(Rectangle ob) {
+        super(ob);
     }
 
     public boolean isSquare() {
@@ -98,14 +146,6 @@ public class Shapes {
         Triangle t2 = new Triangle(8.0, 12.0, "outlined");
         Rectangle r1 = new Rectangle(10.0, 15.0);
         Rectangle r2 = new Rectangle(5.0);
-
-        // t1.setWidth(4.0);
-        // t1.setHeight(4.0);
-        // t1.setStyle("filled");
-
-        // t2.setWidth(8.0);
-        // t2.setHeight(12.0);
-        // t2.setStyle("outlined");
 
         System.out.println("Info for t1:");
         t1.showStyle();
